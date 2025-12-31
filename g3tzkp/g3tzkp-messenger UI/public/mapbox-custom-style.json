@@ -1,0 +1,97 @@
+{
+  "version": 8,
+  "name": "Custom Mapbox Style",
+  "metadata": {
+    "mapbox:autocomposite": true,
+    "mapbox:type": "template",
+    "mapbox:sdk-support": {
+      "js": "1.13.0",
+      "android": "10.0.0",
+      "ios": "6.0.0"
+    }
+  },
+  "sources": {
+    "mapbox": {
+      "type": "vector",
+      "url": "mapbox://mapbox.mapbox-streets-v8"
+    }
+  },
+  "sprite": "mapbox://sprites/mapbox/standard",
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "rgba(62, 46, 45, 1)"
+      }
+    },
+    {
+      "id": "land",
+      "type": "fill",
+      "source": "mapbox",
+      "source-layer": "land",
+      "paint": {
+        "fill-color": "rgba(88, 62, 58, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "mapbox",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "rgba(30, 25, 29, 1)"
+      }
+    },
+    {
+      "id": "roads",
+      "type": "line",
+      "source": "mapbox",
+      "source-layer": "road",
+      "paint": {
+        "line-color": "rgba(143, 99, 84, 1)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "buildings",
+      "type": "fill",
+      "source": "mapbox",
+      "source-layer": "building",
+      "paint": {
+        "fill-color": "rgba(220, 168, 133, 1)",
+        "fill-opacity": 0.8,
+        "fill-outline-color": "rgba(255, 165, 0, 0.7)"
+      }
+    },
+    {
+      "id": "holographic-effect",
+      "type": "fill",
+      "source": "mapbox",
+      "source-layer": "building",
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          15,
+          "rgba(255, 165, 0, 0.3)",
+          18,
+          "rgba(255, 215, 0, 0.5)"
+        ],
+        "fill-opacity": 0.5,
+        "fill-translate": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          15,
+          [0, 0],
+          18,
+          [2, 2]
+        ]
+      }
+    }
+  ]
+}

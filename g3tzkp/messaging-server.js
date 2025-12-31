@@ -1548,14 +1548,15 @@ app.post('/api/licenses/beta-lifetime', async (req, res) => {
 
 console.log('[G3ZKP] Licensing API endpoints loaded');
 
-const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY || '';
-const MAPBOX_PUBLIC_TOKEN = process.env.MAPBOX_PUBLIC_TOKEN || '';
+const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY || 'sk.eyJ1IjoiZ2VuZXNpc2dhcm1lbnRzbHRkIiwiYSI6ImNtanUyM2I2czF4aTYzZHNkM3dtMDNybGwifQ.m65Dh1bLA6aLikEhgPYSPg';
+const MAPBOX_PUBLIC_TOKEN = process.env.MAPBOX_PUBLIC_TOKEN || 'pk.eyJ1IjoiZ2VuZXNpc2dhcm1lbnRzbHRkIiwiYSI6ImNtanUyMW9uODFkMWEzZnFzNjQ2eWc3emoifQ.XBEUurTZSHfBVQt7wqAgyQ';
 
 app.get('/api/mapbox/config', (req, res) => {
   res.json({
     available: !!MAPBOX_PUBLIC_TOKEN,
     accessToken: MAPBOX_PUBLIC_TOKEN,
     style: 'mapbox://styles/mapbox/standard',
+    customStyle: '/mapbox-custom-style.json',
     terrainSource: 'mapbox://mapbox.mapbox-terrain-dem-v1',
     buildingsEnabled: true
   });
@@ -2189,6 +2190,21 @@ io.on('connection', (socket) => {
         fromPeerId: peerData.peerId,
         fromPeerName: peerData.peerName,
         answer: data.answer
+      });
+      
+      // Create a chat tab for the accepted connection
+      io.to(targetSocket[0]).emit('create_chat_tab', {
+        peerId: peerData.peerId,
+        peerName: peerData.peerName,
+        conversationId: `conv_${data.callId}`,
+        timestamp: Date.now()
+      });
+      
+      socket.emit('create_chat_tab', {
+        peerId: data.targetPeerId,
+        peerName: targetSocket[1].peerName,
+        conversationId: `conv_${data.callId}`,
+        timestamp: Date.now()
       });
     } else {
       socket.emit('call_error', { callId: data.callId, error: 'Caller no longer available' });

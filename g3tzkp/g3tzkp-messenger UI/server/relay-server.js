@@ -6,10 +6,10 @@ import { webSockets } from '@libp2p/websockets';
 import { circuitRelayServer } from '@libp2p/circuit-relay-v2';
 import { identify } from '@libp2p/identify';
 import { gossipsub } from '@chainsafe/libp2p-gossipsub';
-import * as filters from '@libp2p/websockets/filters';
+import * as filters from '@libp2p/websockets';
 import http from 'http';
 
-const PORT = process.env.RELAY_PORT || 3001;
+const PORT = process.env.RELAY_PORT || 3003;
 
 async function startRelayServer() {
   console.log('[RelayServer] Starting G3ZKP Circuit Relay Server...');

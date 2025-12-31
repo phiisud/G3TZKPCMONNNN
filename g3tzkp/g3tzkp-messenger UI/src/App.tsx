@@ -233,11 +233,39 @@ const App: React.FC = () => {
         await g3tzkpWebService.initialize();
         console.log('[G3TZKP] G3TZKPWebService initialized');
         console.log('[G3TZKP] All G3TZKP services initialized successfully');
+        
+        // Load initial contacts from PeerContactService
+        const initialContacts = peerContactService.getAllContacts();
+        setMeshContacts(initialContacts.map(contact => ({
+          peerId: contact.peerId,
+          displayName: contact.contactName,
+          avatar: undefined,
+          isOnline: contact.connectionStatus === 'connected',
+          unreadCount: contact.unreadCount
+        })));
       } catch (error) {
         console.error('[G3TZKP] Failed to initialize services:', error);
       }
     };
     initG3TZKPServices();
+  }, []);
+
+  // Subscribe to contact changes from PeerContactService
+  useEffect(() => {
+    const unsubscribe = peerContactService.subscribe((updatedContacts) => {
+      console.log('[App] Received contact update from PeerContactService:', updatedContacts.length, 'contacts');
+      setMeshContacts(updatedContacts.map(contact => ({
+        peerId: contact.peerId,
+        displayName: contact.contactName,
+        avatar: undefined,
+        isOnline: contact.connectionStatus === 'connected',
+        unreadCount: contact.unreadCount
+      })));
+    });
+    
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   // BETA MODE: Auto-grant lifetime license (static deployment - always grant)
@@ -1134,13 +1162,34 @@ const App: React.FC = () => {
                 onVoiceMessage={(blob) => handleVoiceMessage(blob, 0, [])}
                 onCreateGroup={() => setModal('group')}
                 onJoinGroup={() => setShowJoinModal(true)}
-                onAddContact={(contact) => {
-                  setMeshContacts(prev => [...prev, {
-                    peerId: contact.peerId,
-                    displayName: currentOperator.displayName || currentOperator.peerId.substring(0, 12),
-                    isOnline: true,
-                    unreadCount: 0
-                  }]);
+                onAddContact={async (contact) => {
+                  try {
+                    // Check if contact already exists in PeerContactService
+                    const existingContact = peerContactService.getContact(contact.peerId);
+                    
+                    if (existingContact) {
+                      // If contact exists, just select their chat tab
+                      setSelectedPeerChat(contact.peerId);
+                      console.log('[App] Contact already exists, selecting chat tab for:', contact.peerId);
+                    } else {
+                      // Add new contact through PeerContactService
+                      await peerContactService.addContact({
+                        peerId: contact.peerId,
+                        contactName: contact.displayName
+                      });
+                      
+                      // The contact will be added to meshContacts via the subscription
+                      setSelectedPeerChat(contact.peerId);
+                      console.log('[App] Added new contact and selected chat tab for:', contact.peerId);
+                    }
+                  } catch (error) {
+                    console.error('[App] Failed to add contact:', error);
+                    // Even if there's an error, try to select the contact if it exists
+                    const existingContact = peerContactService.getContact(contact.peerId);
+                    if (existingContact) {
+                      setSelectedPeerChat(contact.peerId);
+                    }
+                  }
                 }}
                 onCall={(type) => setModal(type === 'voice' ? 'call_voice' : 'call_video')}
                 onReactToMessage={handleReactToMessage}
