@@ -1,0 +1,42 @@
+{
+  "name": "G3ZKP Messenger",
+  "version": "1.0.0",
+  "buildDate": "2025-12-24T13:44:00.000Z",
+  "betaMode": true,
+  "platforms": ["web", "android", "ios", "windows", "mac", "linux"],
+  "packages": {
+    "web": "g3zkp-web-pwa.tar.gz",
+    "android": "g3zkp-android-debug.apk (project in android/ directory)",
+    "ios": "g3zkp-ios-project.tar.gz",
+    "windows": "electron builds in electron/ directory",
+    "mac": "electron builds in electron/ directory",
+    "linux": "electron builds in electron/ directory",
+    "server": "g3zkp-server.tar.gz"
+  },
+  "requirements": {
+    "web": "Modern web browser with PWA support",
+    "android": "Android 8.0+",
+    "ios": "iOS 14.0+ with Safari",
+    "windows": "Windows 10+",
+    "mac": "macOS 11.0+",
+    "linux": "Ubuntu 18.04+, Fedora 30+, or similar",
+    "server": "Node.js 18+, Linux/macOS/Windows server"
+  },
+  "installation": {
+    "web": "Extract zip and serve files with web server, or deploy to hosting platform",
+    "android": "Open project in Android Studio, build and install APK",
+    "ios": "Open project in Xcode, build and deploy to device/simulator",
+    "desktop": "Run the installer/package for your platform",
+    "server": "Extract tar.gz, run ./start-server.sh"
+  },
+  "configuration": {
+    "environment_variables": [
+      "COMPANIES_HOUSE_API_KEY",
+      "TOMTOM_API_KEY",
+      "HERE_API_KEY",
+      "TFL_API_KEY",
+      "NODE_ENV=production",
+      "PORT=3001"
+    ]
+  }
+}

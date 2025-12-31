@@ -1,0 +1,35 @@
+{
+  "package": "g3zkp-web-pwa.zip",
+  "torrent": "torrents/g3zkp-web-pwa.zip.torrent",
+  "sha256": "8e252d8d4bc9571169e542f902374ff1c96a343eb04e73e9b5eaf625b98df9fc76",
+  "size": "1024",
+  "seeds": [
+    {
+      "location": "London, UK",
+      "provider": "G3ZKP Primary Seed",
+      "url": "https://seeds.g3zkp-messenger.com/g3zkp-web-pwa.zip.torrent",
+      "bandwidth": "1Gbps"
+    },
+    {
+      "location": "New York, USA",
+      "provider": "G3ZKP North America Seed",
+      "url": "https://us-seeds.g3zkp-messenger.com/g3zkp-web-pwa.zip.torrent",
+      "bandwidth": "500Mbps"
+    },
+    {
+      "location": "Frankfurt, Germany",
+      "provider": "G3ZKP Europe Seed",
+      "url": "https://eu-seeds.g3zkp-messenger.com/g3zkp-web-pwa.zip.torrent",
+      "bandwidth": "750Mbps"
+    },
+    {
+      "location": "Singapore",
+      "provider": "G3ZKP Asia Seed",
+      "url": "https://asia-seeds.g3zkp-messenger.com/g3zkp-web-pwa.zip.torrent",
+      "bandwidth": "600Mbps"
+    }
+  ],
+  "magnet_link": "magnet:?xt=urn:btih:8e252d8d4bc9571169e542f902374ff1c96a343eb04e73e9b5eaf625b98df9fc76&dn=G3ZKP-Messenger-g3zkp-web-pwa.zip&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce",
+  "created": "2025-12-24T08:01:59Z",
+  "version": "1.0.0"
+}

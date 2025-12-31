@@ -1,0 +1,24 @@
+{
+  "name": "g3zkp-circuits",
+  "version": "1.0.0",
+  "private": true,
+  "description": "G3ZKP Zero-Knowledge Proof Circuits - Production Grade",
+  "scripts": {
+    "build:circuits:prod": "bash compile-production.sh",
+    "build:circuits:prod:win": "compile-production.bat",
+    "build:circuits": "bash compile-production.sh",
+    "test:circuits": "node test-circuits.js",
+    "setup": "mkdir -p build",
+    "verify": "npm run build:circuits && npm run test:circuits"
+  },
+  "devDependencies": {
+    "circom": "^0.5.46",
+    "circom2": "^0.2.22",
+    "snarkjs": "^0.7.5"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "fnv-plus": "^1.3.1",
+    "nanoassert": "^3.0.1"
+  }
+}

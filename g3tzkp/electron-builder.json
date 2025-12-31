@@ -1,0 +1,208 @@
+{
+  "appId": "com.g3zkp.messenger",
+  "productName": "G3TZKP Messenger",
+  "copyright": "Copyright © 2025 G3TZKP",
+  "asar": true,
+  "directories": {
+    "output": "release/${version}",
+    "buildResources": "assets"
+  },
+  "files": [
+    "dist/electron/**/*",
+    "package.json"
+  ],
+  "extraResources": [
+    {
+      "from": "assets",
+      "to": "assets",
+      "filter": ["**/*"]
+    }
+  ],
+  "publish": [
+    {
+      "provider": "generic",
+      "url": "https://releases.g3zkp.com",
+      "channel": "latest"
+    }
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "ia32"]
+      }
+    ],
+    "icon": "assets/icon.ico",
+    "artifactName": "G3TZKP-Messenger-${version}-Setup.${ext}",
+    "publisherName": "G3TZKP Technologies",
+    "verifyUpdateCodeSignature": false,
+    "requestedExecutionLevel": "asInvoker"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "G3TZKP Messenger",
+    "installerIcon": "assets/icon.ico",
+    "uninstallerIcon": "assets/icon.ico",
+    "installerHeaderIcon": "assets/icon.ico",
+    "license": "LICENSE.md",
+    "warningsAsErrors": false
+  },
+  "portable": {
+    "artifactName": "G3TZKP-Messenger-${version}-Portable.${ext}"
+  },
+  "mac": {
+    "target": [
+      {
+        "target": "dmg",
+        "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "arm64"]
+      }
+    ],
+    "icon": "assets/icon.icns",
+    "category": "public.app-category.social-networking",
+    "artifactName": "G3TZKP-Messenger-${version}-${arch}.${ext}",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "entitlements": "build/entitlements.mac.plist",
+    "entitlementsInherit": "build/entitlements.mac.plist",
+    "type": "distribution"
+  },
+  "dmg": {
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ],
+    "background": "assets/dmg-background.png",
+    "icon": "assets/icon.icns",
+    "iconSize": 128,
+    "window": {
+      "width": 540,
+      "height": 380
+    }
+  },
+  "linux": {
+    "target": [
+      {
+        "target": "AppImage",
+        "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "deb",
+        "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "rpm",
+        "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "snap",
+        "arch": ["x64"]
+      },
+      {
+        "target": "tar.gz",
+        "arch": ["x64", "arm64"]
+      }
+    ],
+    "icon": "assets/icons",
+    "category": "Network;InstantMessaging",
+    "artifactName": "G3TZKP-Messenger-${version}-${arch}.${ext}",
+    "synopsis": "Zero-Knowledge Proof Messenger",
+    "description": "Privacy-first P2P messaging with military-grade encryption and zero-knowledge proofs",
+    "desktop": {
+      "Name": "G3TZKP Messenger",
+      "Comment": "Secure Zero-Knowledge Messaging",
+      "Categories": "Network;InstantMessaging;P2P",
+      "MimeType": "x-scheme-handler/g3zkp",
+      "StartupWMClass": "G3TZKP Messenger"
+    }
+  },
+  "appImage": {
+    "artifactName": "G3TZKP-Messenger-${version}-${arch}.AppImage",
+    "license": "LICENSE.md"
+  },
+  "deb": {
+    "depends": [
+      "gconf2",
+      "gconf-service",
+      "libnotify4",
+      "libappindicator1",
+      "libxtst6",
+      "libnss3"
+    ],
+    "priority": "optional",
+    "afterInstall": "build/linux/after-install.sh",
+    "afterRemove": "build/linux/after-remove.sh"
+  },
+  "rpm": {
+    "depends": [
+      "libXScrnSaver",
+      "libappindicator",
+      "libnotify"
+    ],
+    "fpm": [
+      "--rpm-os=linux"
+    ]
+  },
+  "snap": {
+    "confinement": "strict",
+    "grade": "stable",
+    "summary": "Zero-Knowledge Proof Messenger",
+    "plugs": [
+      "default",
+      "camera",
+      "audio-playback",
+      "audio-record",
+      "desktop",
+      "desktop-legacy",
+      "home",
+      "network",
+      "network-bind",
+      "opengl",
+      "pulseaudio",
+      "removable-media",
+      "unity7",
+      "wayland",
+      "x11"
+    ]
+  },
+  "protocols": [
+    {
+      "name": "g3zkp",
+      "role": "Viewer",
+      "schemes": ["g3zkp"]
+    }
+  ],
+  "fileAssociations": [
+    {
+      "ext": "g3zkp",
+      "name": "G3TZKP Message",
+      "description": "G3TZKP Encrypted Message",
+      "icon": "assets/file-icon.ico",
+      "role": "Editor"
+    }
+  ]
+}

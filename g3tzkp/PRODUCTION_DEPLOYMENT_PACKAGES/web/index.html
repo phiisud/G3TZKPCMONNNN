@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G3TZKP | Geodesic Meta-Interface</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Zero-Knowledge Proof Messenger - Privacy-first P2P messaging with military-grade encryption">
+    <meta name="theme-color" content="#00f3ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="G3TZKP">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hologram-blue: #00f3ff;
+            --oak-green: #4caf50;
+            --deep-oak: #0a1a0a;
+            --matrix-bg: #010401;
+        }
+        body {
+            background-color: var(--matrix-bg);
+            color: var(--hologram-blue);
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+        
+        #root {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes rotorse-alpha {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes rotorse-beta {
+            0% { transform: rotate(360deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(0.95); }
+            100% { transform: rotate(0deg) scale(1.1); }
+        }
+
+        @keyframes load {
+            0% { left: -100%; width: 50%; }
+            50% { left: 0%; width: 100%; }
+            100% { left: 100%; width: 50%; }
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index-df9b1cbc.js"></script>
+  <link rel="stylesheet" href="/assets/index-262325d8.css">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('[PWA] Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.error('[PWA] Service Worker registration failed:', error);
+                    });
+            });
+            
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                console.log('[PWA] Install prompt available');
+                window.dispatchEvent(new CustomEvent('pwa-install-available', { detail: e }));
+            });
+            
+            window.addEventListener('appinstalled', () => {
+                console.log('[PWA] App installed successfully');
+                deferredPrompt = null;
+            });
+        }
+    </script>
+</body>
+</html>

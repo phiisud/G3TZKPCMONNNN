@@ -1,0 +1,40 @@
+{
+  "name": "@g3tzkp/image-processing",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Non-AI background removal and image processing for G3TZKP Messenger",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./SaliencyDetector": {
+      "import": "./src/SaliencyDetector.ts"
+    },
+    "./ColorRangeSegmenter": {
+      "import": "./src/ColorRangeSegmenter.ts"
+    },
+    "./GrabCutProcessor": {
+      "import": "./src/GrabCutProcessor.ts"
+    },
+    "./EdgeDetector": {
+      "import": "./src/EdgeDetector.ts"
+    },
+    "./MorphologyProcessor": {
+      "import": "./src/MorphologyProcessor.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {}
+}

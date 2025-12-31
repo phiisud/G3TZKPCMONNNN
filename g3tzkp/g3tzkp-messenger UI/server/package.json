@@ -1,0 +1,22 @@
+{
+  "name": "g3zkp-relay-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "G3ZKP Circuit Relay Server for P2P connectivity",
+  "main": "relay-server.js",
+  "scripts": {
+    "start": "node relay-server.js",
+    "dev": "node --watch relay-server.js"
+  },
+  "dependencies": {
+    "@chainsafe/libp2p-gossipsub": "^13.0.0",
+    "@chainsafe/libp2p-noise": "^15.0.0",
+    "@chainsafe/libp2p-yamux": "^6.0.2",
+    "@libp2p/circuit-relay-v2": "^2.0.0",
+    "@libp2p/crypto": "^4.0.0",
+    "@libp2p/identify": "^2.0.0",
+    "@libp2p/tcp": "^9.0.0",
+    "@libp2p/websockets": "^8.0.0",
+    "libp2p": "^1.8.0"
+  }
+}

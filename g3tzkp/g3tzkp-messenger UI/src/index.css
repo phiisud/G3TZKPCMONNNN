@@ -1,0 +1,415 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --color-primary: #00f3ff;
+  --color-secondary: #4caf50;
+  --color-background: #000000;
+  --color-surface: #010401;
+  --color-text: #00f3ff;
+  --color-textSecondary: #4caf50;
+  --color-border: #4caf50;
+  --color-error: #ff0055;
+  --color-success: #4caf50;
+  --color-warning: #ffaa00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background, #000000);
+  color: var(--color-text, #00f3ff);
+  font-family: 'JetBrains Mono', monospace;
+  overflow: hidden;
+}
+
+#root {
+  background-color: var(--color-background, #000000);
+  color: var(--color-text, #00f3ff);
+  min-height: 100vh;
+}
+
+.orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4caf50;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* MOBILE & TABLET RESPONSIVE STYLES */
+
+/* Base responsive layout */
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  /* Touch-friendly tap targets */
+  button, a, input, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Font scaling for mobile */
+  html {
+    font-size: 14px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Tablet specific */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  /* Stack layouts vertically on small screens */
+  .flex-row-mobile {
+    flex-direction: column !important;
+  }
+  
+  /* Full width on mobile */
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  
+  /* Hide on mobile */
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger tap targets */
+  button, a {
+    padding: 12px 16px;
+  }
+  
+  /* Disable hover effects on touch */
+  .hover\:bg-cyan-500\/10:hover {
+    background-color: transparent;
+  }
+  
+  /* Use active states instead */
+  button:active, a:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce padding in landscape mode */
+  .p-4 {
+    padding: 0.5rem !important;
+  }
+  
+  .p-6 {
+    padding: 1rem !important;
+  }
+  
+  /* Smaller headers in landscape */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Responsive container utilities */
+.container-responsive {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .container-responsive {
+    padding: 0 0.75rem;
+  }
+}
+
+/* Responsive grid */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Responsive modal/dialog */
+@media (max-width: 768px) {
+  [role="dialog"], .modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Scrollable areas on mobile */
+.scroll-mobile {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .scroll-mobile {
+    max-height: calc(100vh - 120px);
+  }
+}
+
+/* Responsive text sizes */
+.text-responsive-sm {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+.text-responsive-base {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+}
+
+.text-responsive-xl {
+  font-size: clamp(1.125rem, 3.5vw, 1.25rem);
+}
+
+.text-responsive-2xl {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+  nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  /* Add bottom padding to content to account for fixed nav */
+  main {
+    padding-bottom: 80px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tablet-w-1\/2 {
+    width: 50%;
+  }
+  
+  .tablet-w-full {
+    width: 100%;
+  }
+}
+
+/* Mobile popup/modal optimizations */
+@media (max-width: 640px) {
+  .popup-mobile {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+/* Touch-friendly button styles */
+.btn-touch {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-touch:active {
+  transform: scale(0.96);
+}
+
+/* Mobile chat list optimizations */
+@media (max-width: 640px) {
+  .chat-list-item {
+    padding: 12px 12px !important;
+  }
+  
+  .chat-avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .chat-name {
+    font-size: 13px !important;
+  }
+  
+  .chat-preview {
+    font-size: 11px !important;
+  }
+}
+
+/* Mobile keyboard handling */
+@media (max-height: 450px) {
+  .keyboard-visible {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+  }
+}
+
+/* Smooth scrolling for iOS */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Prevent pull-to-refresh on mobile */
+.no-overscroll {
+  overscroll-behavior: none;
+}
+
+/* Mobile-first flex utilities */
+.flex-mobile-col {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-mobile-col {
+    flex-direction: row;
+  }
+}
+
+/* Mobile input improvements */
+.input-mobile {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 8px;
+}
+
+.input-mobile:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* Viewport height fix for mobile browsers */
+.h-screen-mobile {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-screen-mobile {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Peer Discovery Popup mobile styles */
+@media (max-width: 480px) {
+  .peer-discovery-popup {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+  }
+  
+  .peer-discovery-qr {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  .peer-discovery-scanner {
+    width: 100% !important;
+    height: 250px !important;
+  }
+}
+
+/* Animation for QR scanner line */
+@keyframes scanLine {
+  0%, 100% {
+    top: 10%;
+  }
+  50% {
+    top: 90%;
+  }
+}
+
+.scan-line-animate {
+  animation: scanLine 2s ease-in-out infinite;
+}
+
+/* Vibrant glow effects for mobile */
+.glow-cyan {
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.3), 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3), 0 0 20px rgba(76, 175, 80, 0.1);
+}

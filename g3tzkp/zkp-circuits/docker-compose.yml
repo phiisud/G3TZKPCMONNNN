@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  circuits-compiler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: g3zkp-circuits-compiler
+    volumes:
+      - ./build:/circuits/build
+      - ./production:/circuits/production
+    environment:
+      - NODE_ENV=production
+      - PTAU_PATH=/circuits/pot12_final.ptau
+    command: bash compile-production.sh
+
+  circuits-tester:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: g3zkp-circuits-tester
+    volumes:
+      - ./build:/circuits/build
+      - ./test-circuits.js:/circuits/test-circuits.js
+    depends_on:
+      - circuits-compiler
+    command: npm run test:circuits

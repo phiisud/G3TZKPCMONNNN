@@ -1,0 +1,19 @@
+{
+  "name": "@g3zkp/audit",
+  "version": "1.0.0",
+  "description": "Security audit engine for G3ZKP Messenger",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@g3zkp/core": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["security", "audit", "zkp", "monitoring"]
+}

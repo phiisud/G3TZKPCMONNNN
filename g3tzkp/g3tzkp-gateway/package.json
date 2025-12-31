@@ -1,0 +1,14 @@
+{
+  "name": "g3tzkp-gateway",
+  "version": "1.0.0",
+  "description": "G3TZKP Hosted Gateway - Browser-agnostic access to P2P apps",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io-client": "^4.7.2"
+  },
+  "type": "module"
+}
